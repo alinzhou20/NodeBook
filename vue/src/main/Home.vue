@@ -32,6 +32,7 @@ const toSearch = (outData) =>{
 /* 接收从searchView传来的方法，跳转到bookView */
 const outSearch = (outData) =>{
 	inData.inDetail = outData
+	console.log(inData)
 	router.push({name:'bookView'})
 }
 

@@ -11,7 +11,7 @@ import java.util.List;
 @TableName("book")
 @Data
 public class Book {
-    @TableId(value = "book_id",type = IdType.AUTO)
+    @TableId(value = "id",type = IdType.AUTO)
     private Integer id;
     private String name;
     private Integer writerId;

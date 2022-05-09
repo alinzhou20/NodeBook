@@ -1,61 +1,47 @@
 <script setup lang="ts">
 	
-/* logo 导入本地图片*/
-
-import logoSrc from '@/assets/logo.png'; 
-const logo_src = logoSrc;
-
+import logoSrc from '@/assets/logo.png';  //导入logo
+const logo_src = logoSrc; 
 
 /* 输入框 */
-
-//引入 注意此处的文件都是从modules中引入的 与main.ts 无关
-import { ref,reactive,toRaw } from 'vue';
+import { ref,reactive,toRaw } from 'vue';  //引入 注意此处的文件都是从modules中引入的 与main.ts 无关
 import axios from 'axios';
 
-//获取输入框文本
-const search = ref('');
+const searchTxt = ref(''); //输入框文本
 
-//存储搜索后的返回值
-var searchData = reactive({
-      searchDetail: [],
+var Data = reactive({  //存储搜索后的返回值
+      Detail: [],
     });
 	
-//触发父组件事件
-const emits = defineEmits(['toSearch'])
+const emits = defineEmits(['toSearch']) //触发父组件事件
 	
-//使用axios向后端发起搜索请求	
-const toSearch = function(){
-	axios.get('/api/book/search',{
+
+const toSearch = function(){  //使用axios向后端发起搜索请求	
+	axios.get('/api/book/searchByName',{
 		params:{
-			search: search.value
+			bookName: searchTxt.value  //应该和spring对应
 		}
 	}).then(res=>{ 
-		/* 此处可以获取外部的Data */
-		searchData.searchDetail = JSON.parse(JSON.stringify(res.data));
-		
+		Data.Detail = JSON.parse(JSON.stringify(res.data)); //此处可以获取外部的Data
 	}).catch(err=>{console.log(err);})
 
-    /* 父子组件传递的时候必须要求是ref 或者 reactive*/
-    const outData = toRaw(searchData)
+    const outData = toRaw(Data) //父子组件传递的时候必须要求是ref 或者 reactive
+	console.log(outData)
 	emits('toSearch',outData)
 }
-
-
-
 
 /* 用户 */
 import router from '@/router/index.ts'
 const circleUrl ='https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'
 
 function toLogin(){
-   router.push({name:'login'})
+   console.log('toLogin')
 }
-
-
 </script>
 
+
+
 <template>
-	
 <div id="nav">
   <el-row :gutter="10" id="row">  
 	<!-- logo -->
@@ -68,7 +54,7 @@ function toLogin(){
 	
 	<!-- 搜索框 -->
     <el-col :span="9" :offset="2" class="col" style="margin-right:10px;">
-		<el-input v-model="search" placeholder="请输入你想要查询的书籍" />
+		<el-input v-model="searchTxt" placeholder="请输入你想要查询的书籍" />
 	</el-col>
     <el-col :span="2" class="col" style="margin-left:0;">
 		<el-button type="primary" @click="toSearch">搜索</el-button>
@@ -88,8 +74,7 @@ function toLogin(){
 		        <el-dropdown-item disabled>书架查询</el-dropdown-item>
 		        <el-dropdown-item divided>继续阅读</el-dropdown-item>
 		      </el-dropdown-menu>
-		    </template> 
-			
+		    </template> 		
 		</el-dropdown>
 	</el-col> 
   </el-row>

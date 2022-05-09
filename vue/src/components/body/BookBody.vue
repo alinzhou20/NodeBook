@@ -4,9 +4,9 @@
 	<div id="body">
 		正文内容
 	</div>
-	<el-table :data="toRaw(searchData.searchDetail)" style="width: 100%">
-	   
-	   <el-table-column prop="name" label="Name" width="180" />
+	<el-table :data="toRaw(Data.Detail)" style="width: 100%">
+	   <el-table-column prop="list" label="章节号" width="180" />
+	   <el-table-column prop="title" label="章节名" width="180" />
 	   <el-table-column align="right">
 	         <template #default="scope">
 	           <el-button
@@ -27,22 +27,21 @@ const props = defineProps<{
 	inBook: any
 }>();
 
-var searchData = reactive({
-      searchDetail: [],
+var Data = reactive({
+      Detail: [],
     });
 	
-
+	
 /* 从后端获取书籍目录 */
 onMounted(()=>{
-	axios.get('/api/book/searchById',{
+	axios.get('/api/chapter/searchByBookId',{
 		params:{
-			bookId: toRaw(props.inBook.inDetail.inDetail.bookId)
+			bookId: toRaw(props.inBook.inDetail.inDetail.id)
 		}
 	}).then(res=>{ 
 		/* 此处可以获取外部的Data */
 			console.log(res)
-		searchData.searchDetail = JSON.parse(JSON.stringify(res.data.data));
-		
+		Data.Detail = JSON.parse(JSON.stringify(res.data.data));
 	}).catch(err=>{console.log(err);})
 	
 	/* 父子组件传递的时候必须要求是ref 或者 reactive*/

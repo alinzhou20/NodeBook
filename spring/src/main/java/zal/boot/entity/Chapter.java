@@ -8,10 +8,10 @@ import lombok.Data;
 @TableName("chapter")
 @Data
 public class Chapter {
-    @TableId(value = "chapter_id",type = IdType.AUTO)
+    @TableId(value = "id",type = IdType.AUTO)
     private Integer id;
     private Integer bookId;
-    private Integer order;
+    private Integer list;
     private String title;
     private String content;
 

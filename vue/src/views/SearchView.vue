@@ -1,7 +1,7 @@
 <template>
 	<p>{{title}}</p>
 
- <el-table :data="toRaw(props).inData.inDetail.searchDetail.data" style="width: 100%">
+ <el-table :data="toRaw(props).inData.inDetail.Detail.data" style="width: 100%">
     
     <el-table-column prop="name" label="Name" width="180" />
     <el-table-column align="right">
@@ -28,6 +28,7 @@ const props = defineProps<{
 
 /* 跳转书籍 */
 interface Book {
+  bookId:number
   name: string
 }
 

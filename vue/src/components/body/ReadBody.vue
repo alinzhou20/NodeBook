@@ -3,9 +3,8 @@
 	<div id="body">
 		正文内容
 	</div>
-	<h1>{{msg}}</h1>
 	<div id="content">
-		{{chapterData.chapterDetail}}
+		{{Data.Detail}}
 	</div>
 </template>
 
@@ -16,19 +15,19 @@ const props = defineProps<{
 	inRead: any
 }>();
 
-var chapterData = reactive({
-      chapterDetail: '',
+var Data = reactive({
+      Detail: '',
     });
 
-console.log(chapterData.chapterDetail)
 onMounted(()=>{
 	
-	axios.get('/api/book/getContent',{
+	axios.get('/api/chapter/searchById',{
 		params:{
-			chapterId: toRaw(props.inRead.inDetail.inDetail.chapterId)
+			chapterId: toRaw(props.inRead.inDetail.inDetail.id)
 		}
 	}).then(res=>{ 
-		chapterData.chapterDetail = JSON.parse(JSON.stringify(res.data.data.content));
+		console.log(res)
+		Data.Detail = JSON.parse(JSON.stringify(res.data.data.content));
 
 	}).catch(err=>{console.log(err);})
 	

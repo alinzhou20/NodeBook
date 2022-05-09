@@ -15,6 +15,4 @@ public interface BookMapper extends BaseMapper<Book> {
     List<Book> searchByName(@Param("bookName") String bookName);
 
 
-
-
 }

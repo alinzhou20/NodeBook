@@ -21,9 +21,6 @@ public class BookController {
     BookMapper bookMapper;
 
     @Resource
-    ChapterMapper chapterMapper;
-
-    @Resource
     TagMapper tagMapper;
 
 
@@ -31,20 +28,11 @@ public class BookController {
     @GetMapping("/searchByName")
     public Result searchBook(@RequestParam String bookName){
         List<Book> books = bookMapper.searchByName('%'+bookName+'%');
+        System.out.println(books);
         return Result.success(books);
     }
 
-    /*根据书籍信息查询细节*/
-    @GetMapping("/searchById")
-    public Result searchById(@RequestParam Integer bookId){
-        Book book = bookMapper.selectById(bookId);
-        Tag tag = tagMapper.selectById(book.getTagId());
-        book.setTag(tag.getName());
 
-
-
-        return Result.success("");
-    }
 
     @GetMapping("/getContent")
     public Result getContent(@RequestParam Integer chapterId){

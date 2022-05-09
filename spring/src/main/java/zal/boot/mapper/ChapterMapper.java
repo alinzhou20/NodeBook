@@ -10,10 +10,10 @@ import zal.boot.entity.Chapter;
 import java.util.List;
 
 @Mapper
-public interface ChapterMapper extends BaseMapper<Book> {
+public interface ChapterMapper extends BaseMapper<Chapter> {
 
-    @Select("select chapter_id,order,title from chapter where book_id = #{bookId};")
-    List<Chapter> selectTitles(@Param("bookId") Integer bookId);
+    @Select("select id,list,title,book_id from chapter where book_id = #{bookId};")
+    List<Chapter> searchByBookId(@Param("bookId") Integer bookId);
 
 
 
