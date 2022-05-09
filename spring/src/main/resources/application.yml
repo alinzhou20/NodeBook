@@ -1,0 +1,14 @@
+server:
+  port: 9090
+
+spring:
+  datasource:
+    druid:
+      url: jdbc:mysql://localhost:3306/nodebook?serverTimezone=UTC&characterEncoding=UTF-8
+      username: root
+      password: 111111
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true # 数据库下划线自动转驼峰标示关闭
