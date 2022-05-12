@@ -18,6 +18,7 @@ public class Book {
     private String writer;
     private Integer tagId;
     private String tag;
+    private String imgUrl;
 
     private List<Chapter> chapters;
 

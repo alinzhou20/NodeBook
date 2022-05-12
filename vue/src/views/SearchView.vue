@@ -1,25 +1,6 @@
-<template>
-	<p>{{title}}</p>
-
- <el-table :data="toRaw(props).inData.inDetail.Detail.data" style="width: 100%">
-    
-    <el-table-column prop="name" label="Name" width="180" />
-    <el-table-column align="right">
-          <template #default="scope">
-            <el-button
-              size="small"
-              type="danger"
-              @click="toBook(scope.$index, scope.row)"
-              >点击查看</el-button
-            >
-          </template>
-        </el-table-column>
-  </el-table>
-</template>
-
 <script setup lang="ts">
 
-import { ref,toRaw} from 'vue'
+import {ref,toRaw} from 'vue'
 
 /* 接收父组件给的参数 */
 const props = defineProps<{
@@ -32,14 +13,35 @@ interface Book {
   name: string
 }
 
-const emits = defineEmits(['outSearch'])
-const toBook = (index: number, row: Book) => {
-  const outData = toRaw(row)
-  emits('outSearch',outData)
+const emits = defineEmits(['toBookView'])
+const toBookView = (index: number, row: Book) => {
+  const outData = toRaw(row).id
+  window.sessionStorage.setItem('tar_book', outData)
+  emits('toBookView',outData)
 }
 
 
 </script>
+
+
+<template>
+
+ <el-table :data="props.inData.inDetail.Detail.data" style="width: 100%">
+    
+    <el-table-column prop="name" label="Name" width="180" />
+    <el-table-column align="right">
+          <template #default="scope">
+            <el-button
+              size="small"
+              type="danger"
+              @click="toBookView(scope.$index, scope.row)"
+              >点击查看</el-button
+            >
+          </template>
+        </el-table-column>
+  </el-table>
+</template>
+
 
 <style scoped>
 	#book{

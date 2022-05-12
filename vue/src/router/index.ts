@@ -41,6 +41,12 @@ const routes: Array<RouteRecordRaw> = [
 		  name: 'readView',
 		  component: () => import('../views/ReadView.vue')
 		},
+		{
+			  /* 用户页面*/
+		  path: '/userView',
+		  name: 'userView',
+		  component: () => import('../views/UserView.vue')
+		},
 	]
   },
 

@@ -1,18 +1,10 @@
-<template>
-	<div id="header">
-		<HeaderNav ref="res" @toSearch='toSearch'/>
-	</div>
-
-	<div id="body">
-		<router-view :inData="inData" @outSearch='outSearch' @toRead='toRead'/>
-	</div>
-</template>
+<!-- 承载view的主页面
+     主要用于调用子组件以及传递数据-->
 
 <script setup lang="ts">
 import {ref,watch,reactive} from 'vue';
 import HeaderNav from '@/components/nav/HeaderNav.vue'; 
 import router from '@/router/index.ts';
-
 
 let inData = reactive({
 	inDetail:[]
@@ -21,29 +13,45 @@ let inData = reactive({
 let res = ref(null);
 
 
-
-
 /* 通过搜索框，跳转搜索页 */
-const toSearch = (outData) =>{
+const toSearchView = (outData) =>{
 	inData.inDetail = outData
     router.push({name:'searchView'})
 }
 
 /* 接收从searchView传来的方法，跳转到bookView */
-const outSearch = (outData) =>{
+const toBookView = (outData) =>{
+	console.log(outData)
 	inData.inDetail = outData
-	console.log(inData)
 	router.push({name:'bookView'})
 }
 
 /* 接受章节信息，进入具体内容 */
-const toRead = (outData) =>{
-	console.log(outData)
+const toReadView = (outData) =>{
 	inData.inDetail = outData
 	router.push({name:'readView'})
 }
 
+const toUserView = () =>{
+	router.push({name:'userView'})
+}
+
 </script>
+<template>
+	<div id="header">
+		<HeaderNav ref="res" 
+		@toSearchView='toSearchView'
+		@toUserView='toUserView'/>
+	</div>
+
+	<div id="body">
+		<router-view :inData="inData" 
+		@toBookView='toBookView' 
+		@toReadView='toReadView'/>
+	</div>
+</template>
+
+
 
 <style scoped>
 	#header{

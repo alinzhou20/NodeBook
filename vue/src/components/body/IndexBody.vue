@@ -9,114 +9,24 @@
 			</el-table>
 		</el-col>
 	
+		
+	
 		<el-col :span="19" :offset="1">
 			<el-row :gutter="20" style="margin-top: 20px;">
-				<el-col :span="6" >
+				<el-col :span="6" v-for="item in Data.Detail" :key="item" style="margin-top: 40px;">
 					<div class="item">
-						<el-card :body-style="{ padding: '0px'}" style='background-color: #ffffff6e; border: 0;'>
-						<img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image"/>
+						<el-card :body-style="{ padding: '0px'}" style='background-color: #fff9ea; border: 0;'> <!-- #ffffff6e可以调整不透明度 -->
+						<img style="width: 350px; height: 200px; " :src="getImg(item.imgUrl)" class="image"/>
 						<div>
-							<span>龙族</span>
+							<span>{{item.name}}</span>
 							<div class="bottom">
-								<el-button type="text" class="button" @click="toRead">点击查看</el-button>
+								<el-button type="text" class="button" @click="toBookView(item.id)" 
+								style='color: #ff5582; border: 0;'>点击查看</el-button>
 							</div>
 						</div>
 					  </el-card>
 					</div>
 				</el-col>
-				<el-col :span="6">
-					<div class="item">
-						<el-card :body-style="{ padding: '0px'}" style='background-color: #ffffff6e; border: 0;'>
-						<img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image"/>
-						<div>
-							<span>龙族</span>
-							<div class="bottom">
-								<el-button type="text" class="button">点击查看</el-button>
-							</div>
-						</div>
-					  </el-card>
-					</div>
-				</el-col>
-				<el-col :span="6">
-					<div class="item">
-						<el-card :body-style="{ padding: '0px'}" style='background-color: #ffffff6e; border: 0;'>
-						<img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image"/>
-						<div>
-							<span>龙族</span>
-							<div class="bottom">
-								<el-button type="text" class="button">点击查看</el-button>
-							</div>
-						</div>
-					  </el-card>
-					</div>
-				</el-col>
-				<el-col :span="6">
-					<div class="item">
-						<el-card :body-style="{ padding: '0px'}" style='background-color: #ffffff6e; border: 0;'>
-						<img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image"/>
-						<div>
-							<span>龙族</span>
-							<div class="bottom">
-								<el-button type="text" class="button">点击查看</el-button>
-							</div>
-						</div>
-					  </el-card>
-					</div>
-				</el-col>							
-			</el-row>
-			<el-row :gutter="20" style="margin-top: 20px;">
-				<el-col :span="6" >
-					<div class="item">
-						<el-card :body-style="{ padding: '0px'}" style='background-color: #ffffff6e; border: 0;'>
-						<img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image"/>
-						<div>
-							<span>龙族</span>
-							<div class="bottom">
-								<el-button type="text" class="button">点击查看</el-button>
-							</div>
-						</div>
-					  </el-card>
-					</div>
-				</el-col>
-				<el-col :span="6">
-					<div class="item">
-						<el-card :body-style="{ padding: '0px'}" style='background-color: #ffffff6e; border: 0;'>
-						<img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image"/>
-						<div>
-							<span>龙族</span>
-							<div class="bottom">
-								<el-button type="text" class="button">点击查看</el-button>
-							</div>
-						</div>
-					  </el-card>
-					</div>
-				</el-col>
-				<el-col :span="6">
-					<div class="item">
-						<el-card :body-style="{ padding: '0px'}" style='background-color: #ffffff6e; border: 0;'>
-						<img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image"/>
-						<div>
-							<span>龙族</span>
-							<div class="bottom">
-								<el-button type="text" class="button">点击查看</el-button>
-							</div>
-						</div>
-					  </el-card>
-					</div>
-				</el-col>
-				<el-col :span="6">
-					<div class="item">
-						<el-card :body-style="{ padding: '0px'}" style='background-color: #ffffff6e; border: 0;'>
-						<img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image"/>
-						<div>
-							<span>龙族</span>
-							<div class="bottom">
-								<el-button type="text" class="button">点击查看</el-button>
-							</div>
-						</div>
-					  </el-card>
-					</div>
-				</el-col>							
 			</el-row>
 		</el-col>
 	
@@ -126,29 +36,43 @@
 	</div>
 </template>
 <script setup lang="ts">
+/* 列表 */
+import {ref,toRaw,onMounted,reactive,require} from 'vue'
+import axios from 'axios';
+const getImg = function(url){
+	let img = require('@/assets/ImgData/'+url);
+	return img;
+}
+var Data = reactive({  //存储返回值
+      Detail: [],
+    });
+onMounted(()=>{
+	axios.get('/api/book/getCasualBook',{
+		params:{
+			number: 8
+		}
+	})
+	.then(res=>{ 		
+		Data.Detail = JSON.parse(JSON.stringify(res.data.data));
+		console.log(Data.Detail)		
+	}).catch(err=>{console.log(err);})
+}) 
+
 
 const tableData = [
   {
     date: '龙族',
-
   },
-  {
-    date: '斗罗大陆',
 
-  },
-  {
-    date: '斗破苍穹',
-
-  },
-  {
-    date: '大王饶命啊',
-
-  },
 ]
 
-import router from '@/router/index.ts'
-function toRead(){
-   router.push({name:'read'})
+
+
+const emits = defineEmits(['toBookView'])
+const toBookView = (outData) => {
+  console.log(outData)
+  window.sessionStorage.setItem('tar_book', outData)
+  emits('toBookView',outData)
 }
 </script>
 

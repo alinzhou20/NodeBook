@@ -19,7 +19,7 @@ public class ChapterController {
     @Resource
     ChapterMapper chapterMapper;
 
-    /*根据id查询具体信息*/
+    /*根据id查询文章内容*/
     @GetMapping("/searchById")
     public Result searchById(@RequestParam Integer chapterId){
         Chapter chapter = chapterMapper.selectById(chapterId);
@@ -28,7 +28,7 @@ public class ChapterController {
 
     /*根据书籍id查询具体信息*/
     @GetMapping("/searchByBookId")
-    public Result searchByBookId(@RequestParam Integer bookId){
+    public Result searchByBookId( Integer bookId){
         List<Chapter> chapters = chapterMapper.searchByBookId(bookId);
         return Result.success(chapters);
     }

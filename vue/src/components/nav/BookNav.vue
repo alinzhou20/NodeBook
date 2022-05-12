@@ -8,11 +8,11 @@
 				<el-row>
 					<el-col :span="6">
 						<!-- 书名 -->
-						{{toRaw(props.inBook.inDetail.inDetail.name)}}
+						{{props.inBook.inDetail.name}}
 					</el-col>
 					<el-col :span="6">
 						<!-- 作者 -->
-						江南
+						{{props.inBook.inDetail.writer}}
 					</el-col>
 				</el-row>
 				
@@ -62,7 +62,8 @@ function toChapter(){
 
 
 
-/* 获取书籍信息 */
+/* 获取书籍信息 
+   !! 注意，不能两次toRaw*/
 
 const props = defineProps<{
 	inBook: any

@@ -52,8 +52,8 @@
   	<el-col :span="12" :offset="2">
 		<div id="light">
 			<el-carousel :interval="4000" type="card" height="200px">
-			    <el-carousel-item v-for="item in lightImgs" :key="item">
-			      <el-image style="width: 350px; height: 200px; " :src="item.url" />
+			    <el-carousel-item v-for="item in Data.Detail" :key="item">
+			      <el-image style="width: 350px; height: 200px; " :src="getImg(item.imgUrl)" />
 			    </el-carousel-item>
 			  </el-carousel>
 		</div>  	
@@ -66,17 +66,27 @@
 </template>
 
 <script setup lang="ts">
+import {ref,toRaw,onMounted,reactive,require} from 'vue'
+import axios from 'axios';
+const getImg = function(url){
+	let img = require('@/assets/ImgData/'+url);
+	return img;
+}
 /* 走马灯 */
-import lightImgs_1 from '@/assets/logo.png'; 
-import lightImgs_2 from '@/assets/imgs/background.jpg';
-import lightImgs_3 from '@/assets/imgs/background.jpg';
-const lightImgs = [
-        { url: lightImgs_1 },
-		{ url: lightImgs_2 },
-		{ url: lightImgs_3 }
-      ]
-
-
+var Data = reactive({  //存储返回值
+      Detail: [],
+    });
+onMounted(()=>{
+	axios.get('/api/book/getCasualBook',{
+		params:{
+			number: 3
+		}
+	})
+	.then(res=>{ 		
+		Data.Detail = JSON.parse(JSON.stringify(res.data.data));
+		console.log(Data.Detail)		
+	}).catch(err=>{console.log(err);})
+}) 
 </script>
 
 

@@ -15,8 +15,7 @@
 body{
     margin: 0px;
     padding: 0px;
-    background-image: url(./assets/imgs/background.jpg);
-    background-attachment: fixed;
+	background-color: #2c3e50;
 }
 
 nav {
