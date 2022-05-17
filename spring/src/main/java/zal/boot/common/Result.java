@@ -28,7 +28,7 @@ public class Result{
     }
 
     /*失败*/
-    public static Result error(Object data) {
-        return new Result("1", "失败", data);
+    public static Result error(String msg) {
+        return new Result("1", "失败", null);
     }
 }

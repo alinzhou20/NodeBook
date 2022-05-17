@@ -10,9 +10,6 @@ let inData = reactive({
 	inDetail:[]
 });
 
-let res = ref(null);
-
-
 /* 通过搜索框，跳转搜索页 */
 const toSearchView = (outData) =>{
 	inData.inDetail = outData
@@ -20,9 +17,7 @@ const toSearchView = (outData) =>{
 }
 
 /* 接收从searchView传来的方法，跳转到bookView */
-const toBookView = (outData) =>{
-	console.log(outData)
-	inData.inDetail = outData
+const toBookView = () =>{
 	router.push({name:'bookView'})
 }
 
@@ -39,7 +34,7 @@ const toUserView = () =>{
 </script>
 <template>
 	<div id="header">
-		<HeaderNav ref="res" 
+		<HeaderNav 
 		@toSearchView='toSearchView'
 		@toUserView='toUserView'/>
 	</div>

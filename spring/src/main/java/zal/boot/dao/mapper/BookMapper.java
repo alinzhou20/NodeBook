@@ -1,4 +1,4 @@
-package zal.boot.mapper;
+package zal.boot.dao.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import jdk.internal.org.objectweb.asm.tree.IincInsnNode;

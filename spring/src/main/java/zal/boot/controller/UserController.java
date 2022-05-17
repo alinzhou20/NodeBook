@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import zal.boot.common.Result;
 import zal.boot.entity.User;
-import zal.boot.mapper.UserMapper;
+import zal.boot.dao.mapper.UserMapper;
 
 import javax.annotation.Resource;
 import java.util.Map;

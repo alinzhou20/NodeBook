@@ -1,13 +1,11 @@
 <script setup lang="ts">
 import { ref,reactive,toRaw,onMounted } from 'vue';
 import axios from 'axios';
-
+import router from '@/router/index.ts'
 
 var Data = reactive({
       Detail: [],
     });
-
-
 
 /* 从后端获取书籍目录 */
 onMounted(()=>{
@@ -25,12 +23,14 @@ onMounted(()=>{
 }) 
 
 const emits =  defineEmits(['toReadView'])
+
 interface Capter {
   id: number
 }
 const toReadView = (index: number, row: Capter) => {
-	const outData = toRaw(row)
-	emits('toReadView',outData)
+	const chapterId = toRaw(row).id
+	window.sessionStorage.setItem('tar_chapter', chapterId)
+	router.push({name:'readView'})
 }
 
 </script>
@@ -38,9 +38,6 @@ const toReadView = (index: number, row: Capter) => {
 
 <template>
 	<div id="header">
-	</div>
-	<div id="body">
-		正文内容
 	</div>
 	<el-table :data="toRaw(Data.Detail)" style="width: 100%">
 	   <el-table-column prop="list" label="章节号" width="180" />

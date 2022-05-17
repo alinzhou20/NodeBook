@@ -5,9 +5,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import zal.boot.common.Result;
-import zal.boot.entity.Book;
 import zal.boot.entity.Chapter;
-import zal.boot.mapper.ChapterMapper;
+import zal.boot.dao.mapper.ChapterMapper;
 
 import javax.annotation.Resource;
 import java.util.List;

@@ -4,15 +4,10 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.web.bind.annotation.*;
 import zal.boot.common.Result;
 import zal.boot.entity.Book;
-import zal.boot.entity.Chapter;
-import zal.boot.entity.Tag;
-import zal.boot.mapper.BookMapper;
-import zal.boot.mapper.ChapterMapper;
-import zal.boot.mapper.TagMapper;
+import zal.boot.dao.mapper.BookMapper;
+import zal.boot.dao.mapper.TagMapper;
 
 import javax.annotation.Resource;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
 /*相当于业务层*/
@@ -23,10 +18,16 @@ public class BookController {
     @Resource
     BookMapper bookMapper;
 
-    @Resource
-    TagMapper tagMapper;
-
+    /*定义书籍查询条件*/
     private QueryWrapper<Book> queryWrapper = null;
+
+    /*根据书籍id获得信息*/
+    @GetMapping("/getById")
+    public Result getById(@RequestParam Integer bookId){
+        Book book = bookMapper.selectBybookId(bookId);
+        book.setWriter(bookMapper.selectWriter(book.getWriterId()));
+        return Result.success(book);
+    }
 
     /*从数据库查询书籍*/
     @GetMapping("/searchByName")
@@ -35,14 +36,6 @@ public class BookController {
         System.out.println(books);
         return Result.success(books);
     }
-
-    @GetMapping("/getById")
-    public Result getById(@RequestParam Integer bookId){
-        Book book = bookMapper.selectBybookId(bookId);
-        book.setWriter(bookMapper.selectWriter(book.getWriterId()));
-        return Result.success(book);
-    }
-
 
 
     @GetMapping("/getUserBook")

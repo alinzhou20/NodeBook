@@ -23,7 +23,7 @@ onMounted(()=>{
 	
 	axios.get('/api/chapter/searchById',{
 		params:{
-			chapterId: toRaw(props.inRead.inDetail.inDetail.id)
+			chapterId: window.sessionStorage.getItem('tar_chapter')
 		}
 	}).then(res=>{ 
 		console.log(res)
