@@ -2,7 +2,6 @@ package zal.boot.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.web.bind.annotation.*;
-import zal.boot.common.Result;
 import zal.boot.entity.Book;
 import zal.boot.dao.mapper.BookMapper;
 import zal.boot.dao.mapper.TagMapper;
