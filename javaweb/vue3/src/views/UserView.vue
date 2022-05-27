@@ -53,7 +53,7 @@ const toBookView = (outData) => {
 		 	<el-col :span="6" v-for="item in Data.Detail" :key="item">
 		 		<div class="item">
 		 			<el-card :body-style="{ padding: '0px'}" style='background-color: #ffffff6e; border: 0;'>
-		 			<img style="width: 350px; height: 200px; " :src="getImg(item.imgUrl)" class="image"/>
+		 			<img style="width: 160px; height: 240px; " :src="getImg(item.imgUrl)" class="image"/>
 		 			<div>
 		 				<span>{{item.name}}</span>
 		 				<div class="bottom">

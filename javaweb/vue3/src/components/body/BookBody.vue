@@ -18,9 +18,7 @@ onMounted(()=>{
 		/* 此处可以获取外部的Data */
 		Data.Detail = JSON.parse(JSON.stringify(res.data.data));
 	}).catch(err=>{console.log(err);})
-	
 	/* 父子组件传递的时候必须要求是ref 或者 reactive*/
-	
 }) 
 
 const emits =  defineEmits(['toReadView'])

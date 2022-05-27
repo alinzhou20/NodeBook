@@ -1,7 +1,9 @@
+controller\WriterController.class
 controller\filter\LoginFilter.class
 pojo\Chapter.class
 utils\Druid.class
 controller\UserController.class
+service\WriterService.class
 service\BookService.class
 controller\ChapterController.class
 service\ChapterService.class
@@ -13,3 +15,4 @@ dao\BookDao.class
 controller\BookController.class
 pojo\Book.class
 dao\ChapterDao.class
+dao\WriterDao.class

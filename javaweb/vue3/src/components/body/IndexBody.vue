@@ -11,6 +11,9 @@ const tableData = [ //排行榜数据
   {
     date: '龙族',
   },
+  {
+    date: '斗罗',
+  },
 ]
 const getImg = function(url){
 	let img = require('@/assets/ImgData/'+url);
@@ -36,6 +39,16 @@ onMounted(()=>{
 	.then(res=>{ 		
 		Data.Detail = JSON.parse(JSON.stringify(res.data.data));		
 	}).catch(err=>{console.log(err);})
+	
+	axios.get('/api/book',{ //获得确定数量的随机书籍
+		params:{
+			method: 'getTopBook',
+			tag:'0'
+		}
+	})
+	.then(res=>{ 		
+		Data.Detail = JSON.parse(JSON.stringify(res.data.data));		
+	}).catch(err=>{console.log(err);})
 }) 
 </script>
 
@@ -47,7 +60,7 @@ onMounted(()=>{
 		<!-- 排行榜 -->
 		<el-col :span="2" :offset="1">
 			<el-table :data="tableData" size="large">
-				<el-table-column prop="date" label="玄幻排行"/>
+				<el-table-column prop="date" label="热门排行"/>
 			</el-table>
 		</el-col>
 	

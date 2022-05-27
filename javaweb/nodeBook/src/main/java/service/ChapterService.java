@@ -33,4 +33,27 @@ public class ChapterService {
     }
 
 
+    /**
+     *@description 根据章节id删除
+     *@Date 2022/5/21 8:58
+     */
+    public Result deleteChapter(Integer chapterId) throws Exception {
+        if (chapterDao.deleteChapter(chapterId)>0){
+            return Result.success();
+        }else {
+            return Result.error("未知错误");
+        }
+    }
+
+    /**
+     *@description 添加章节
+     *@Date 2022/5/21 8:58
+     */
+    public Result addChapter(Chapter chapter) throws Exception {
+        if (chapterDao.addChapter(chapter)>0){
+            return Result.success();
+        }else {
+            return Result.error("重复添加");
+        }
+    }
 }

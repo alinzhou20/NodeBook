@@ -52,12 +52,21 @@ public class BookController extends HttpServlet {
                 try {
                     String tag = req.getParameter("tag");
                     tag = new String(tag.getBytes(StandardCharsets.ISO_8859_1),StandardCharsets.UTF_8);
-                    System.out.println(tag);
                     res = bookService.searchByTag(tag);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
                 break;
+            case "getTopBook":
+                try {
+                    String tag = req.getParameter("tag");
+                    res = bookService.getTopBook(tag);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+
+
 
 
         }

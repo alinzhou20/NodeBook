@@ -86,6 +86,20 @@ public class BookService {
         }
         return Result.success(books);
     }
+    /**
+     *@description
+     *@Date 2022/5/27 10:54
+     */
+    public Result getTopBook(String tag) throws Exception {
 
+
+        ArrayList<Integer> bookIds = bookDao.getTopBook(tag,5);
+        List<Book> books = new ArrayList<Book>();
+        for (int i = 0;i < bookIds.size(); i++) {
+            Book book = bookDao.selectById(bookIds.get(i));
+            books.add(book);
+        }
+        return Result.success(books);
+    }
 
 }

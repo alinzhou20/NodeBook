@@ -18,8 +18,8 @@
 	</el-col>
 
 	<el-col :span="4">
-		<div class="item">
-			作家专区
+		<div class="item" @click="toWriterView">
+			作者专区
 		</div>
 	</el-col>
 
@@ -65,12 +65,13 @@
   </el-row>
   
 
-</div>
+</div>		  
 </template>
 
 <script setup lang="ts">
 import {ref,toRaw,onMounted,reactive,require} from 'vue'
 import axios from 'axios';
+import router from '@/router/index.ts';
 const emits = defineEmits(['toSearchView'])
 const getImg = function(url){
 	let img = require('@/assets/ImgData/'+url);
@@ -106,6 +107,10 @@ const classify = (val) =>{
 	}).catch(err=>{console.log(err);})
 	
 	
+}
+
+const toWriterView = function(){
+	router.push({name:'writerView'})
 }
 </script>
 

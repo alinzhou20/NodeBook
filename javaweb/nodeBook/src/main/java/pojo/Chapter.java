@@ -9,6 +9,7 @@ public class Chapter {
     private Integer list;
     private String title;
     private String content;
+    private String price;
 
     public Chapter() {}
     public Chapter(Integer id, Integer list, String title) {

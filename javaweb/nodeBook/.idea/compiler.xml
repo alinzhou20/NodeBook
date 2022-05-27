@@ -9,10 +9,10 @@
         <module name="NodeBook" />
         <module name="FireRun" />
         <module name="program" />
+        <module name="nodeBook" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="nodeBook" target="1.7" />
       <module name="Nodebook" target="8" />
     </bytecodeTargetLevel>
   </component>

@@ -86,4 +86,25 @@ public class BookDao {
         }
         return bookIds;
     }
+
+    /**
+     *@description
+     *@Date 2022/5/27 10:55
+     */
+    public ArrayList<Integer> getTopBook(String tag,Integer number) throws Exception {
+
+        Connection con = dataSource.getConnection();
+        Statement stmt = con.createStatement();
+
+        String sql = "SELECT book_id FROM view_book_tag WHERE tag_name = '"+tag+"'";
+
+        ResultSet resultSet = stmt.executeQuery(sql);
+
+        ArrayList<Integer> bookIds = new ArrayList<>();
+        while (resultSet.next()) {
+            int id = resultSet.getInt("book_id");
+            bookIds.add(id);
+        }
+        return bookIds;
+    }
 }

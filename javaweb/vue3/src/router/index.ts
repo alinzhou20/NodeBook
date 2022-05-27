@@ -2,7 +2,6 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import Home from '../main/Home.vue'
 import Read from '../main/Read.vue'
-
 const routes: Array<RouteRecordRaw> = [
   {
 	  /* 主页面*/
@@ -46,6 +45,25 @@ const routes: Array<RouteRecordRaw> = [
 		  path: '/userView',
 		  name: 'userView',
 		  component: () => import('../views/UserView.vue')
+		},
+		{
+			  /* 作家页面*/
+		  path: '/writerView',
+		  name: 'writerView',
+		  component: () => import('../views/WriterView.vue'),
+		  children:[
+			  /* children里面的path 不要加 / ，加了就表示是根目录下的路由。*/
+			  {
+				  path: '',
+				  name: 'writerNav',
+				  component: () => import('../components/nav/WriterNav.vue')
+			  },
+			  {
+			  				  path: 'writerBody',
+			  				  name: 'writerBody',
+			  				  component: () => import('../components/body/WriterBody.vue')
+			  },
+		  ]
 		},
 	]
   },
